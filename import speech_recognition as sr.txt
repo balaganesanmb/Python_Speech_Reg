@@ -1,0 +1,12 @@
+import speech_recognition as sr
+recogniser = sr.Recognizer()
+with sr.Microphone() as source:
+    print("Speak Something")
+    audio_data = recogniser.listen(source, timeout=5)
+    try:
+        text = recogniser.recognize_google(audio_data)
+        print("you said text: ", text)
+    except sr.UnknownValueError:
+        print("speach Recogn could not understand the audio")
+    except sr.RequestError as e:
+        print("error with the service{0}".format(e))
